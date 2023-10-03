@@ -1,21 +1,31 @@
 """List of prime numbers generator."""
 """ENTER YOUR SOLUTION HERE!"""
 
+from math import sqrt
+
+
 def primes(number_of_primes):
     primes = []
-    Break = False
-    
-    for number in range(number_of_primes):
-        for multiple in range(2, number):
-            if number != multiple and number % multiple == 0:
-                Break = True
-                break
-        if Break: 
-            Break = False
-            continue
-        primes.append(number)
-        
+    prime = 2
+    while number_of_primes >= 1:
+        if isPrime(prime):
+            primes.append(prime)
+            number_of_primes -=1
+        prime += 1
     return primes
+    
+
+def isPrime(prime):
+    # check for divisibility by 2 so you dont have to check for all even numbers
+    if prime % 2 == 0:
+        if prime == 2:
+            return True
+        return False
+    
+    for factor in range(3, int(sqrt(prime) + 1) , 2):
+        if prime % factor == 0:
+            return False
+    return True
 
 
 print(primes(20))
